@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProblemSets.iml" filepath="$PROJECT_DIR$/ProblemSets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neobi.iml" filepath="$PROJECT_DIR$/neobi.iml" />
     </modules>
   </component>
 </project>
