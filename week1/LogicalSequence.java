@@ -1,21 +1,20 @@
 import java.util.Scanner;
 
-public class LogicalSequence {
+public class S2 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        doIt(in.nextInt(), in.nextInt());
-    }
-    private static void doIt(int col, int num){
-        int counter = 0;
+        int column = in.nextInt();
+        int num = in.nextInt();
+        int c = 0;
+
         for(int i = 1; i <= num; i++){
-            String ii = i + "";
-            if(counter == col){
-                System.out.println();
-                counter = 0;
+            if(c != column - 1){
+                System.out.print(i + " ");
+                c++;
+            }else {
+                System.out.println(i);
+                c = 0;
             }
-            counter++;
-            if(counter != col){ii += " ";}
-            System.out.print(ii);
         }
     }
 }
