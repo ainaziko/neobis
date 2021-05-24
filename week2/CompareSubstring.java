@@ -27,5 +27,3 @@ public class CompareSubstring {
         System.out.println(counter);
     }
 }
-
-
