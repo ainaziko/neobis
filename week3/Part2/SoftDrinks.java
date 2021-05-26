@@ -1,6 +1,8 @@
 package Part2;
 
-public class SoftDrinks extends Product {
+import java.util.Objects;
+
+public class SoftDrinks{
     private int id;
     private String name;
     private boolean natual;
@@ -9,8 +11,7 @@ public class SoftDrinks extends Product {
     private double price;
     private int duplicates;
 
-    public SoftDrinks() {
-    }
+    public SoftDrinks() {}
 
     public SoftDrinks(String name, boolean natual, boolean carbonated, int weight, double price, int duplicates) {
         this.name = name;
@@ -88,7 +89,28 @@ public class SoftDrinks extends Product {
     }
 
     @Override
-    public double calcPrice() {
-        return price * duplicates;
+    public String toString() {
+        return "SoftDrinks{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", natual=" + natual +
+                ", carbonated=" + carbonated +
+                ", weight=" + weight +
+                ", price=" + price +
+                ", duplicates=" + duplicates +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SoftDrinks that = (SoftDrinks) o;
+        return id == that.id && natual == that.natual && carbonated == that.carbonated && weight == that.weight && Double.compare(that.price, price) == 0 && duplicates == that.duplicates && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, natual, carbonated, weight, price, duplicates);
     }
 }

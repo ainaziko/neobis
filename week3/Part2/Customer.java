@@ -1,5 +1,7 @@
 package Part2;
 
+import java.util.Objects;
+
 public class Customer {
     private Long id;
     private String firstname;
@@ -7,7 +9,17 @@ public class Customer {
     private String email;
     private String city;
 
+    public Customer() {}
+
     public Customer(String firstname, String lastName, String email, String city) {
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.email = email;
+        this.city = city;
+    }
+
+    public Customer(Long id, String firstname, String lastName, String email, String city) {
+        this.id = id;
         this.firstname = firstname;
         this.lastName = lastName;
         this.email = email;
@@ -52,5 +64,29 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id) && Objects.equals(firstname, customer.firstname) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email) && Objects.equals(city, customer.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastName, email, city);
     }
 }
