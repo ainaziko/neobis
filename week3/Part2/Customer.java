@@ -8,14 +8,23 @@ public class Customer {
     private String lastName;
     private String email;
     private String city;
+    private Order order;
 
-    public Customer() {}
+    public Customer() {
+    }
 
     public Customer(String firstname, String lastName, String email, String city) {
         this.firstname = firstname;
         this.lastName = lastName;
         this.email = email;
         this.city = city;
+    }
+    public Customer(String firstname, String lastName, String email, String city, Order order) {
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.email = email;
+        this.city = city;
+        this.order = order;
     }
 
     public Customer(Long id, String firstname, String lastName, String email, String city) {
@@ -24,6 +33,15 @@ public class Customer {
         this.lastName = lastName;
         this.email = email;
         this.city = city;
+    }
+
+    public Customer(Long id, String firstname, String lastName, String email, String city, Order order) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastName = lastName;
+        this.email = email;
+        this.city = city;
+        this.order = order;
     }
 
     public Long getId() {
@@ -66,6 +84,14 @@ public class Customer {
         this.city = city;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -74,6 +100,7 @@ public class Customer {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", city='" + city + '\'' +
+                ", order=" + order +
                 '}';
     }
 
@@ -82,11 +109,11 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(firstname, customer.firstname) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email) && Objects.equals(city, customer.city);
+        return Objects.equals(id, customer.id) && Objects.equals(firstname, customer.firstname) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email) && Objects.equals(city, customer.city) && Objects.equals(order, customer.order);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastName, email, city);
+        return Objects.hash(id, firstname, lastName, email, city, order);
     }
 }

@@ -5,73 +5,67 @@ import java.util.Objects;
 public class Order {
     private int orderId;
     private Customer customer;
-    private Cake cake;
-    private SoftDrinks softDrinks;
+    private Dessert dessert;
+    private int dessertDuplicates;
+    private SoftDrink softDrink;
+    private int softDrinkDuplicates;
+    private String date;
+
 
     public Order() {}
 
-    public Order(Customer customer, Cake cake) {
-        this.customer = customer;
-        this.cake = cake;
+    public Order(Dessert dessert, int dessertDuplicates, String date) {
+        this.dessert = dessert;
+        this.dessertDuplicates = dessertDuplicates;
+        this.date = date;
+    }
+    public Order(SoftDrink softDrink, int softDrinkDuplicates, String date) {
+        this.softDrink = softDrink;
+        this.softDrinkDuplicates = softDrinkDuplicates;
+        this.date = date;
     }
 
-    public Order(Customer customer, SoftDrinks softDrinks) {
-        this.customer = customer;
-        this.softDrinks = softDrinks;
+    public Order(Dessert dessert,int dessertDuplicates, SoftDrink softDrink, int softDrinkDuplicates, String date) {
+        this.dessert = dessert;
+        this.dessertDuplicates = dessertDuplicates;
+        this.softDrink = softDrink;
+        this.softDrinkDuplicates = softDrinkDuplicates;
+        this.date = date;
     }
 
-    public Order(Customer customer, Cake cake, SoftDrinks softDrinks) {
-        this.customer = customer;
-        this.cake = cake;
-        this.softDrinks = softDrinks;
-    }
 
-    public Order(int orderId, Customer customer, Cake cake, SoftDrinks softDrinks) {
+    public Order(int orderId, Dessert dessert, int dessertDuplicates, String date) {
         this.orderId = orderId;
-        this.customer = customer;
-        this.cake = cake;
-        this.softDrinks = softDrinks;
+        this.dessert = dessert;
+        this.dessertDuplicates = dessertDuplicates;
+        this.date = date;
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
+    public Order(int orderId, SoftDrink softDrink, int softDrinkDuplicates, String date) {
         this.orderId = orderId;
+        this.softDrink = softDrink;
+        this.softDrinkDuplicates = softDrinkDuplicates;
+        this.date = date;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Cake getCake() {
-        return cake;
-    }
-
-    public void setCake(Cake cake) {
-        this.cake = cake;
-    }
-
-    public SoftDrinks getSoftDrinks() {
-        return softDrinks;
-    }
-
-    public void setSoftDrinks(SoftDrinks softDrinks) {
-        this.softDrinks = softDrinks;
+    public Order(int orderId, Dessert dessert, int dessertDuplicates, SoftDrink softDrink, int softDrinkDuplicates, String date) {
+        this.orderId = orderId;
+        this.dessert = dessert;
+        this.dessertDuplicates = dessertDuplicates;
+        this.softDrink = softDrink;
+        this.softDrinkDuplicates = softDrinkDuplicates;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", customer=" + customer +
-                ", cake=" + cake +
-                ", softDrinks=" + softDrinks +
+                ", dessert=" + dessert +
+                ", dessertDuplicates=" + dessertDuplicates +
+                ", softDrink=" + softDrink +
+                ", softDrinkDuplicates=" + softDrinkDuplicates +
+                ", date='" + date + '\'' +
                 '}';
     }
 
@@ -80,11 +74,11 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return orderId == order.orderId && Objects.equals(customer, order.customer) && Objects.equals(cake, order.cake) && Objects.equals(softDrinks, order.softDrinks);
+        return orderId == order.orderId && dessertDuplicates == order.dessertDuplicates && softDrinkDuplicates == order.softDrinkDuplicates && customer.equals(order.customer) && dessert.equals(order.dessert) && softDrink.equals(order.softDrink) && date.equals(order.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, customer, cake, softDrinks);
+        return Objects.hash(orderId, customer, dessert, dessertDuplicates, softDrink, softDrinkDuplicates, date);
     }
 }
