@@ -4,10 +4,20 @@
 
 ### Study plan:
 #### Week 1
-What is back-end? API? RESTful? <hr>
+- solved ps
+- learned using git command line <hr>
 
 #### Week 2
-Java and OOP basics <hr>
+- refreshed knowledges in OOP basics 
+- solved the set of algorithmic problems<hr>
+
+#### Week3
+- completed all sql tasks from HackerRank
+- solved sql problems from URI <hr>
+
+#### Week4
+- created POJO classes
+- created normalised tables with relationships to POJO classes <hr>
 
 ```java
 public class Greating(){
