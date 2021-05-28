@@ -17,7 +17,7 @@
 
 #### Week4
 - created POJO classes
-- created normalised tables with relationships to POJO classes <hr>
+- made normalised tables with relationships to POJO classes <hr>
 
 ```java
 public class Greating(){
