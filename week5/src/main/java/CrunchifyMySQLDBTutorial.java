@@ -6,7 +6,7 @@ public class CrunchifyMySQLDBTutorial {
     static Connection connection;
     static PreparedStatement preparedStatement;
     static ResultSet resultSet;
-    static String url = "jdbc:mysql://localhost:3306/TemptingMorsels";
+    static String url = "jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false";
     static String username = "root";
     static String password = "Asadjioli0";
 
