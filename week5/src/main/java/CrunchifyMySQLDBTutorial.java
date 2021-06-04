@@ -53,7 +53,8 @@ public class CrunchifyMySQLDBTutorial {
     }
 
     public static void addCustomerToDB(String firstname, String lastname, String email, String city){
-        String insertQueryStatement = "INSERT  INTO  Customers  VALUES  (?,?,?,?)";
+        String insertQueryStatement = "INSERT  INTO  Customers(firstname, lastname, email, city)  VALUES  (?,?,?,?)";
+
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
             preparedStatement.setString(1, firstname);
