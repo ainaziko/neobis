@@ -20,14 +20,11 @@ price double NOT NULL
 CREATE TABLE Orders (
 order_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 customer_id INT UNSIGNED,
-dessert_id INT UNSIGNED,
-num_of_desserts INT,
-drink_id INT UNSIGNED,
-num_of_drinks INT,
-order_date datetime
+order_date datetime,
+payed boolean
 );
 
-CREATE TABLE Customer (
+CREATE TABLE Customers (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 firstname NVARCHAR(80) NOT NULL,
 lastname NVARCHAR(100) NOT NULL,
@@ -35,6 +32,19 @@ email NVARCHAR(100) NOT NULL,
 city NVARCHAR(80) NOT NULL
 );
 
-ALTER TABLE Orders ADD CONSTRAINT fk_dessert_id FOREIGN KEY (dessert_id) REFERENCES Desserts(id);
-ALTER TABLE Orders ADD CONSTRAINT fk_drink_id FOREIGN KEY (drink_id) REFERENCES Soft_Drinks(id);
-ALTER TABLE Orders ADD CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES Customer(id);
+CREATE TABLE OrderDetails (
+order_id INT UNSIGNED,
+dessert_id INT UNSIGNED,
+dessert_quantity INT, 
+dessert_price FLOAT,
+drink_id INT UNSIGNED,
+drink_quantity INT,
+drink_price FLOAT,
+total FLOAT,
+orderDetailId INT AUTO_INCREMENT PRIMARY KEY
+);
+
+ALTER TABLE OrderDetails ADD CONSTRAINT fk_dessert_id FOREIGN KEY (dessert_id) REFERENCES Desserts(id);
+ALTER TABLE OrderDetails ADD CONSTRAINT fk_drink_id FOREIGN KEY (drink_id) REFERENCES Soft_Drinks(id);
+ALTER TABLE OrderDetails ADD CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES Orders(order_id);
+ALTER TABLE Orders ADD CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES Customers(id);
