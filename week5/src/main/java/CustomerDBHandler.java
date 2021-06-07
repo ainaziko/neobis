@@ -1,14 +1,12 @@
 import java.sql.*;
 
-import static java.rmi.server.LogStream.log;
 
-public class CrunchifyMySQLDBTutorial {
+public class CustomerDBHandler {
     static Connection connection;
     static PreparedStatement preparedStatement;
-    static ResultSet resultSet;
     static String url = "jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false";
     static String username = "root";
-    static String password = "Asadjioli0";
+    static String password = "";
 
     public static void main(String[] args) {
         try {
@@ -21,49 +19,52 @@ public class CrunchifyMySQLDBTutorial {
             log("\n---------- Let's get Data from DB ----------");
             getCustomersFromDB();
 
+            updateCustomer(1, "Mike", "Jake", "mikej@gmail.com");
+
+            log("deleted ");
+            deleteCustomerFromDB(1);
+            getCustomersFromDB();
+
             preparedStatement.close();
-            connection.close(); // connection close
+            connection.close();
 
         } catch (SQLException e) {
-
             e.printStackTrace();
-        }
-    }
-
-    public static void makeDBConnection(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            log("MySQL JDBC Driver is registered");
-        } catch (ClassNotFoundException e) {
-            log("JDBC Driver is not found.");
-            e.printStackTrace();
-        }
-
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-            if(connection != null){
-                log("Connected successfully. Time to push data.");
-            } else {
-                log("Failed to make connection.");
-            }
-        } catch (SQLException throwables) {
-            log("MySQL connection is failed");
-            throwables.printStackTrace();
         }
     }
 
     public static void addCustomerToDB(String firstname, String lastname, String email, String city){
         String insertQueryStatement = "INSERT  INTO  Customers(firstname, lastname, email, city)  VALUES  (?,?,?,?)";
-
         try {
             preparedStatement = connection.prepareStatement(insertQueryStatement);
             preparedStatement.setString(1, firstname);
             preparedStatement.setString(2, lastname);
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, city);
-
             preparedStatement.executeUpdate();
             log(firstname + " is added successfully");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+    private static void updateCustomer(int id, String firstname, String lastname, String email) throws SQLException {
+        String updateQuery = "UPDATE Customers SET firstname = (?) , lastname = (?), email = (?) WHERE id = (?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+        preparedStatement.setString(1, firstname);
+        preparedStatement.setString(2, lastname);
+        preparedStatement.setString(3, email);
+        preparedStatement.setInt(4, id);
+        int rows = preparedStatement.executeUpdate();
+        System.out.println("rows updated " + rows);
+    }
+
+
+    public static void deleteCustomerFromDB(int id){
+        String deleteQuery = "DELETE FROM Customers WHERE id = " + id;
+        try {
+            preparedStatement.executeUpdate(deleteQuery);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -82,7 +83,29 @@ public class CrunchifyMySQLDBTutorial {
                 String city = resultSet.getString("city");
                 System.out.format("%s, %s, %s, %s\n", firstname, lastname, email, city);
             }
+            resultSet.close();
         } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void makeDBConnection(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            log("MySQL JDBC Driver is registered");
+        } catch (ClassNotFoundException e) {
+            log("JDBC Driver is not found.");
+            e.printStackTrace();
+        }
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+            if(connection != null){
+                log("Connected successfully. Time to push data.");
+            } else {
+                log("Failed to make connection.");
+            }
+        } catch (SQLException throwables) {
+            log("MySQL connection is failed");
             throwables.printStackTrace();
         }
     }
@@ -90,8 +113,4 @@ public class CrunchifyMySQLDBTutorial {
     private static void log(String string) {
         System.out.println(string);
     }
-
-
-
-
 }
