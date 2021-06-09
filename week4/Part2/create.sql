@@ -3,7 +3,7 @@ USE TemptingMorsels;
 
 CREATE TABLE Desserts (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-dessert_name NVARCHAR(50) NOT NULL,
+dessert_name NVARCHAR(50) NOT NULL unique,
 dessert_description TEXT,
 imgPath TEXT NOT NULL,
 price double NOT NULL
@@ -28,7 +28,7 @@ CREATE TABLE Customers (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 firstname NVARCHAR(80) NOT NULL,
 lastname NVARCHAR(100) NOT NULL,
-email NVARCHAR(100) NOT NULL,
+email NVARCHAR(100) NOT NULL unique,
 city NVARCHAR(80) NOT NULL
 );
 
@@ -36,11 +36,11 @@ CREATE TABLE OrderDetails (
 order_id INT UNSIGNED,
 dessert_id INT UNSIGNED,
 dessert_quantity INT, 
-dessert_price FLOAT,
+dessert_price DOUBLE,
 drink_id INT UNSIGNED,
 drink_quantity INT,
-drink_price FLOAT,
-total FLOAT,
+drink_price DOUBLE,
+total DOUBLE,
 orderDetailId INT AUTO_INCREMENT PRIMARY KEY
 );
 
