@@ -1,0 +1,44 @@
+JDBC Connectivity
+--------------------------------------------------------------------------------
+In order to connect to database you need to make these steps:
+
+1. register the driver class
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+2. create connection object
+getConnection() method of DriverManager class connects the database to Java project:
+    connection = DriverManager.getConnection(url, username, password);
+You need to provide url, your username and password to bd
+url in my case: jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false
+
+
+
+
+List of functions of CustomerDBHandler:
+--------------------------------------------------------------------------------
+addCustomerToDB()
+updateCustomer()
+deleteCustomerFromDB()
+getCustomersFromDB
+
+
+
+
+Here is the output of my tests:
+--------------------------------------------------------------------------------
+
+MySQL JDBC Driver is registered
+Connected successfully. Time to push data.
+
+---------- Adding new customers to DB ----------
+Mike is added successfully
+Jack is added successfully
+
+---------- Let's get Data from DB ----------
+Mike, Jones, mike@gmail.com, NY
+Jack, Taylor, jack@gmail.com, Washington
+rows updated 1
+deleted
+Jack, Taylor, jack@gmail.com, Washington
+
+Process finished with exit code 0
