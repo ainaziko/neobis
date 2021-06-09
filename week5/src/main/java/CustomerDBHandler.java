@@ -6,7 +6,7 @@ public class CustomerDBHandler {
     static PreparedStatement preparedStatement;
     static String url = "jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false";
     static String username = "root";
-    static String password = "";
+    static String password = "Asadjioli0";
 
     public static void main(String[] args) {
         try {
