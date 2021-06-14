@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Part1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Part1/helloworld.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Part1/foobar.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,12 +1,21 @@
 import java.sql.*;
 
-public class CustomerDBHandler {
+public class Template {
     private static Connection connection;
     static String url = "jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false";
     static String username = "root";
     static String password = "";
 
-    public void addCustomer(String firstname, String lastname, String email, String city){
+    public static void main(String[] args) {
+        Template db = new Template();
+        db.add("Mitsy", "Queen", "queen@gmail.com", "NY");
+        db.update(7, "Jane", "Queen", "janeq@gmail.com", "Washington DC");
+        db.get();
+        db.delete(5);
+        db.get();
+    }
+
+    public void add(String firstname, String lastname, String email, String city){
         connect();
         PreparedStatement preparedStatement = null;
         String insertQueryStatement = "INSERT  INTO  Customers(firstname, lastname, email, city)  VALUES  (?,?,?,?)";
@@ -30,7 +39,7 @@ public class CustomerDBHandler {
         }
     }
 
-    public void getCustomers(){
+    public void get(){
         connect();
         PreparedStatement preparedStatement = null;
         String query = "SELECT * FROM Customers";
@@ -59,7 +68,7 @@ public class CustomerDBHandler {
         }
     }
 
-    public void updateCustomer(int id, String firstname, String lastname, String email, String city){
+    public void update(int id, String firstname, String lastname, String email, String city){
         connect();
         String query = "UPDATE Customers SET firstname = (?) , lastname = (?), email = (?), city = (?) WHERE id = (?)";
         PreparedStatement preparedStatement = null;
@@ -84,7 +93,7 @@ public class CustomerDBHandler {
         }
     }
 
-    public void deleteCustomer(int id){
+    public void delete(int id){
         Connection connection = connect();
         String deleteQuery = "DELETE FROM Customers WHERE id = " + id;
         PreparedStatement preparedStatement = null;
@@ -118,4 +127,3 @@ public class CustomerDBHandler {
         System.out.println(string);
     }
 }
-

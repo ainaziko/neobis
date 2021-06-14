@@ -14,7 +14,7 @@ url in my case: jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false
 
 
 
-List of functions of CustomerDBHandler:
+List of functions of oldVersion.CustomerDBHandler:
 --------------------------------------------------------------------------------
 addCustomerToDB()
 updateCustomer()

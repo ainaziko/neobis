@@ -1,19 +1,17 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 
 public class OrderDetailsDBHandler {
     private static Connection connection;
-    private static PreparedStatement preparedStatement;
-    private static ResultSet resultSet;
+    static String url = "jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false";
+    static String username = "root";
+    static String password = "";
 
-    private static String url = "jdbc:mysql://localhost:3306/TemptingMorsels?useSSL=false";
-    private static String username = "root";
-    private static String password = "";
 
-    public void addOrderDetails(int orderId, int dessertId, int dessertQuantity, double price,
-                                int drinkId, int drinkQuantity, double drinkPrice, double total){
+    public void addDetails(int orderId, int dessertId, int dessertQuantity, double price,
+                    int drinkId, int drinkQuantity, double drinkPrice, double total){
+        connect();
+        PreparedStatement preparedStatement = null;
         String query = "INSERT INTO OrderDetails(order_id, dessert_id, dessert_quantity, dessert_price, drink_id, drink_quantity, drink_price, total) VALUES(?,?,?,?,?,?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(query);
@@ -28,14 +26,56 @@ public class OrderDetailsDBHandler {
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void updateOrderDetails(int orderDetailId, int orderId, int dessertId, int dessertQuantity, double price,
-                                   int drinkId, int drinkQuantity, double drinkPrice, double total){
+    public void getDetails(){
+        connect();
+        PreparedStatement preparedStatement = null;
+        String query = "SELECT * FROM OrderDetails";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                int orderDetailId = resultSet.getInt("orderDetailId");
+                int order_id = resultSet.getInt("order_id");
+                int dessert_id = resultSet.getInt("dessert_id");
+                int dessert_quantity = resultSet.getInt("dessert_quantity");
+                double dessert_price = resultSet.getDouble("dessert_price");
+                int drink_id = resultSet.getInt("drink_id");
+                int drink_quantity = resultSet.getInt("drink_quantity");
+                double drink_price = resultSet.getDouble("drink_price");
+                double total = resultSet.getDouble("total");
+                System.out.println(orderDetailId + ", " + order_id + ", " + dessert_id + ", " + dessert_quantity + ", " + dessert_price + ", " + drink_id
+                        + ", " + drink_quantity + ", " + drink_price + ", " + total);
+            }
+            resultSet.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateDetails(int orderDetailId, int orderId, int dessertId, int dessertQuantity, double price,
+                              int drinkId, int drinkQuantity, double drinkPrice, double total){
+        connect();
         String query = "UPDATE OrderDetails SET order_id = ?, dessert_id = ?, dessert_quantity = ?, " +
                 "dessert_price = ?, drink_id = ?, drink_quantity = ?, drink_price = ?, total = ? WHERE orderDetailId = ?";
-
+        PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,orderId);
@@ -50,40 +90,47 @@ public class OrderDetailsDBHandler {
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void deleteOrderDetails(int orderDetailId){
+    public void deleteDetails(int orderDetailId){
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
         String query = "DELETE FROM OrderDetails WHERE orderDetailId = " + orderDetailId;
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public ResultSet getOrderDetails(){
-        String query = "SELECT * FROM OrderDetails";
+
+    private static Connection connect(){
         try {
-            preparedStatement = connection.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                int orderDetailId = resultSet.getInt("orderDetailId");
-                int order_id = resultSet.getInt("order_id");
-                int dessert_id = resultSet.getInt("dessert_id");
-                int dessert_quantity = resultSet.getInt("dessert_quantity");
-                double dessert_price = resultSet.getDouble("dessert_price");
-                int drink_id = resultSet.getInt("drink_id");
-                int drink_quantity = resultSet.getInt("drink_quantity");
-                double drink_price = resultSet.getDouble("drink_price");
-                double total = resultSet.getDouble("total");
-                System.out.println(orderDetailId + ", " + order_id + ", " + dessert_id + ", " + dessert_quantity + ", " + dessert_price + ", " + drink_id
-                + ", " + drink_quantity + ", " + drink_price + ", " + total);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
-        return resultSet;
+        return connection;
+    }
+    private static void log(String string) {
+        System.out.println(string);
     }
 }
+
