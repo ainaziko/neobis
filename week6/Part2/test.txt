@@ -3,14 +3,9 @@
 3. Parameters
 4. Response
 
-
-For example:
-1. Update an address
-2. POST /api/v1/address
-3. address_id
-4. None (200 OK)
-
 -----------------------------------------------
+-----------------------------------------------
+
 1. Get all data
 2. GET  http://localhost:8083/dessert/all
 3. No parameters
