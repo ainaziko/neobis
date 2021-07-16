@@ -1,0 +1,4 @@
+1. Passwords were not yet encoded (now every password of new user is encoded)
+2. All api endpoints were accessible to everyone (it is accessible now after authentication to users) I am planning to make it accessible for admin
+3. Every page was unsecured. Now there are some pages permitted to everyone and others accessible for signed up users
+4. It is possible to set a password "". I need to make requirements for password in service
