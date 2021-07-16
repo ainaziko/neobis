@@ -1,6 +1,7 @@
 package com.production.stock.security.config;
 
 
+
 import com.production.stock.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

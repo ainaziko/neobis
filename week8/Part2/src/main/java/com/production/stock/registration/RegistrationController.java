@@ -3,6 +3,7 @@ package com.production.stock.registration;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 @Controller
 @RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor

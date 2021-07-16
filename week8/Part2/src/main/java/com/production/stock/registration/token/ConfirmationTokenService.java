@@ -1,5 +1,6 @@
 package com.production.stock.registration.token;
 
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
