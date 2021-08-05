@@ -1,0 +1,43 @@
+POST http://localhost:9090/auth
+
+
+Body->raw->JSON  
+
+{
+    "username": "0",
+    "password": "0"
+}
+
+Received a token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwIiwiZXhwIjoxNjI4MjE1NzAwLCJpYXQiOjE2MjgxNzk3MDB9.vTLnRN1Alb7YOz1sZ2gXsiDa3RPjpFM7gTL7q1gb4jY
+
+
+
+
+GET http://localhost:9090/customer/all
+
+Bearer token
+Token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwIiwiZXhwIjoxNjI4MjE1NzAwLCJpYXQiOjE2MjgxNzk3MDB9.vTLnRN1Alb7YOz1sZ2gXsiDa3RPjpFM7gTL7q1gb4jY
+
+Output:
+
+[
+    {
+        "id": 1,
+        "firstName": "0",
+        "lastName": "0",
+        "email": "0",
+        "password": "$2a$10$et.A.0jpQS3HAfv9bMYTs.6nnAIvHaWi0gVmsvcFAoScTor18VEoa",
+        "appUserRole": "USER",
+        "locked": false,
+        "enabled": true,
+        "authorities": [
+            {
+                "authority": "USER"
+            }
+        ],
+        "username": "0",
+        "accountNonExpired": true,
+        "accountNonLocked": true,
+        "credentialsNonExpired": true
+    }
+]
