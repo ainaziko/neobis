@@ -7,4 +7,6 @@ Verify the MySql start up logs `docker container logs dessert-shop`</br>
 Run the project `docker run -d -p 9090:9090 --name temptingmorsels --link dessert-shop:mysql temptingmorsels`</br>
 Verify the app start up logs `docker container logs temptingmorsels `</br>
 
+# Docker-compose
 
+Run `docker-compose -f docker-compose.yml up`
