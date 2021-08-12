@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  dockershop:
+    container_name: dockershop
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: localshop
+      POSTGRES_PASSWORD: password
+  temptingmorsels:
+    container_name: temptingmorsels
+    image: temptingmorsels
+    ports:
+      - 9090:9090
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dockershop:5432/localshop
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - dockershop
